@@ -4,39 +4,39 @@ using namespace std;
 
 class Room1 {
 public:
-	string Type() const {
+	std::string Type() const {
 		return "Lux\n";
 	}
-	string Capacity() const {
+	std::string Capacity() const {
 		return "3 person\n";
 	}
-	string Prize() const {
+	std::string Prize() const {
 		return "1000$\n";
 	}
 };
 
 class Room2 {
 public:
-	string Type() const {
+	std::string Type() const {
 		return "Middle\n";
 	}
-	string Capacity() const {
+	std::string Capacity() const {
 		return "2 person\n";
 	}
-	string Prize() const {
+	std::string Prize() const {
 		return "750$\n";
 	}
 };
 
 class Room3 {
 public:
-	string Type() const {
+	std::string Type() const {
 		return "Usual\n";
 	}
-	string Capacity() const {
+	std::string Capacity() const {
 		return "1 person\n";
 	}
-	string Prize() const {
+	std::string Prize() const {
 		return "500$\n";
 	}
 };
@@ -58,22 +58,16 @@ public:
 		delete room2_;
 		delete room3_;
 	}
-	string Operation1() {
-		string result = "Room1:\n";
+	std::string Operation() {
+		std::string result = "Room1:\n";
 		result += this->room1_->Type();
 		result += this->room1_->Capacity();
 		result += this->room1_->Prize();
-		return result;
-	}
-	string Operation2() {
-		string result = "Room2:\n";
+		result += "Room2:\n";
 		result += this->room2_->Type();
 		result += this->room2_->Capacity();
 		result += this->room2_->Prize();
-		return result;
-	}
-	string Operation3(){
-		string result = "Room3:\n";
+		result += "Room3:\n";
 		result += this->room3_->Type();
 		result += this->room3_->Capacity();
 		result += this->room3_->Prize();
@@ -81,17 +75,15 @@ public:
 	}
 };
 
-void Client(Facade *facade) {
-	cout << facade->Operation1();
-	cout << facade->Operation2();
-	cout << facade->Operation3();
+void ClientCode(Facade *facade) {
+	std::cout << facade->Operation();
 }
 int main() {
 	Room1 *room1 = new Room1;
 	Room2 *room2 = new Room2;
 	Room3 *room3 = new Room3;
 	Facade *facade = new Facade(room1, room2, room3);
-	Client(facade);
+	ClientCode(facade);
 	delete facade;
 	system("pause");
 	return 0;
