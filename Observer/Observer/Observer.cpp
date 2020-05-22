@@ -12,8 +12,8 @@ public:
 class IRoom {
 public:
 	virtual ~IRoom() {};
-	virtual void Attach(IObserver *observer) = 0;
-	virtual void Detach(IObserver *observer) = 0;
+	virtual void Add(IObserver *observer) = 0;
+	virtual void Delete(IObserver *observer) = 0;
 	virtual void Notify() = 0;
 };
 
@@ -31,10 +31,10 @@ public:
 	virtual ~Room() {
 		cout << "Goodbye, I was the Subject.\n";
 	}
-	void Attach(IObserver *observer) override {
+	void Add(IObserver *observer) override {
 		list_observer_.push_back(observer);
 	}
-	void Detach(IObserver *observer) override {
+	void Delete(IObserver *observer) override {
 		list_observer_.remove(observer);
 	}
 	void Notify() override {
@@ -53,11 +53,6 @@ public:
 	void HowManyObserver() {
 		cout << "There are " << list_observer_.size() << " observers in the list.\n";
 	}
-	void SomeBusinessLogic() {
-		this->message_ = "change message message";
-		Notify();
-		cout << "I'm about to do some thing important\n";
-	}
 
 private:
 	list<IObserver *> list_observer_;
@@ -67,7 +62,7 @@ private:
 class Observer : public IObserver {
 public:
 	Observer(Room &subject) : subject_(subject) {
-		this->subject_.Attach(this);
+		this->subject_.Add(this);
 		cout << "Hi, I'm the Observer \"" << ++Observer::static_number_ << "\".\n";
 		this->number_ = Observer::static_number_;
 	}
@@ -79,8 +74,8 @@ public:
 		message_from_subject_ = message_from_subject;
 		PrintInfo();
 	}
-	void RemoveMeFromTheList() {
-		subject_.Detach(this);
+	void Remove() {
+		subject_.Delete(this);
 		cout << "Observer \"" << number_ << "\" removed from the list.\n";
 	}
 	void PrintInfo() {
@@ -107,21 +102,21 @@ void ClientCode() {
 	room->CreateMessage("I want book this room!");
 
 	room->change1();
-	observer3->RemoveMeFromTheList();
-	observer5->RemoveMeFromTheList();
+	observer3->Remove();
+	observer5->Remove();
 	room->CreateMessage("We still want book this room!");
 
 	room->change2();
-	observer2->RemoveMeFromTheList();
+	observer2->Remove();
 	room->CreateMessage("It's normal date for me");
 	
 	room->change3();
-	observer4->RemoveMeFromTheList();
+	observer4->Remove();
 	room->CreateMessage("It's enough for me");
 
 	cout << endl;
 	room->CreateMessage("I book this room!");
-	observer1->RemoveMeFromTheList();
+	observer1->Remove();
 	cout << endl;
 
 	delete observer5;
