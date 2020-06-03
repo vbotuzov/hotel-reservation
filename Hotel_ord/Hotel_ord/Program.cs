@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace OSBB
+namespace Hotel_ord
 {
     class Program
     {
