@@ -1,10 +1,23 @@
-﻿using System;
+﻿using DAL.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DAL.EF
 {
-    class Hotel_ordContext
+    public class Hotel_ordContext
+        : DbContext
     {
+        public DbSet<Ord> Ords { get; set; }
+        public DbSet<Person> Persons { get; set; }
+        public DbSet<Admin> Admins { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+
+        public Hotel_ordContext(DbContextOptions options)
+            : base(options)
+        {
+        }
+
     }
 }
