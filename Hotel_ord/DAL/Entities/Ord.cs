@@ -8,7 +8,7 @@ namespace DAL.Entities
     {
         public int id_ord { get; set; }
         public int order_id { get; set; }
-        public int room_id { get; set; }
+        public string room_id { get; set; }
         public int admin_id { get; set; }
 
         public List<Person> Persons { get; set; }

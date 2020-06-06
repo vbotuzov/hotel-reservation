@@ -9,7 +9,7 @@ namespace BLL.DTO
         public int Id_ord { get; set; }
         public int Order_id { get; set; }
         public string Room_id { get; set; }
-        public string Admin_id { get; set; }
+        public int Admin_id { get; set; }
         public IEnumerable<OrdDTO> Ords { get; set; }
     }
 }

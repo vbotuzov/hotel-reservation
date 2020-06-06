@@ -30,7 +30,7 @@ namespace BLL.Services.Impl
         }
 
         /// <exception cref="MethodAccessException"></exception>
-        public IEnumerable<OrdDTO> OrdStreets(int pageNumber)
+        public IEnumerable<OrdDTO> GetOrds(int pageNumber)
         {
             var user = SecurityContext.GetUser();
             var userType = user.GetType();
@@ -55,7 +55,7 @@ namespace BLL.Services.Impl
             return ordsDto;
         }
 
-        public void AddStreet(OrdDTO ord)
+        public void AddOrd(OrdDTO ord)
         {
             var user = SecurityContext.GetUser();
             var userType = user.GetType();
@@ -84,10 +84,10 @@ namespace BLL.Services.Impl
             }
         }
 
-        IEnumerable<OrdDTO> IOrdService.GetOrds(int page)
+        /*IEnumerable<OrdDTO> IOrdService.GetOrds(int page)
         {
             throw new NotImplementedException();
-        }
+        }*/
 
         /*public IEnumerable<OrdDTO> GetOrds(int page)
         {
